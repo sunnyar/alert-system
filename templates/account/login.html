@@ -1,0 +1,78 @@
+{% load static %}
+{% load account socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <title>Detexian Dashbord</title>
+  <link rel="stylesheet" href="{% static 'assets/css/vendor.bundle.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/app.bundle.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/theme-a.css' %}">
+</head>
+<body id="auth_wrapper" >
+  <div id="login_wrapper">
+    <div class="logo">
+      <img src="{% static 'assets/img/logo/logo_large.png' %}" alt="logo" class="logo-img">
+    </div>
+    <div id="login_content">
+      <h1 class="login-title">
+        Sign In to your account
+      </h1>
+      <div class="login-body">
+        <form class="login" method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
+          <div class="form-group label-floating is-empty">
+            <label for="id_login" class="control-label">Email</label>
+            <input type="email" name="login" autofocus="autofocus" required id="id_login" class="form-control">
+          </div>
+          <div class="form-group label-floating is-empty">
+            <label for="id_password" class="control-label">Password</label>
+            <input type="password" name="password" required id="id_password" class="form-control">
+          </div>
+           <a href="javascript:void(0)" data-toggle="register" class="forgot-pass pull-right">Forgot Password?</a>
+          <div class="checkbox inline-block">
+            <label>
+              <input type="checkbox" class="checkbox-inline" value="">
+              Remember Me
+            </label>
+          </div>
+          <!--a href="javascript:void(0)" class="btn btn-info btn-block m-t-40">Sign In</a-->
+          <button type="submit" class="btn btn-info btn-block m-t-40">Sign In</button>          
+        </form>
+      </div>
+      <div class="login-footer p-15">
+        
+      </div>
+      <div id="register_wrapper">
+        <ul class="card-actions icons right-top">
+          <li>
+            <a href="javascript:void(0)" data-toggle="register">
+              <i class="zmdi zmdi-close"></i>
+            </a>
+          </li>
+        </ul>
+        <h1 class="login-title">
+Forget Password        </h1>
+        <div class="login-body">
+          <form>
+           
+            <div class="form-group label-floating is-empty">
+              <label class="control-label">Email</label>
+              <input type="email" class="form-control">
+            </div>
+            <div class="checkbox inline-block">
+              
+            </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
+  <script src="{% static 'assets/js/app.bundle.js' %}"></script>
+</body>
+</html>

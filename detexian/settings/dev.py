@@ -21,7 +21,18 @@ DATABASES = {
 
 INSTALLED_APPS = DEFAULT_APPS + \
 					[
+					'allauth',
+				    'allauth.account',
+				    'allauth.socialaccount',
                     'alerts',
-                    'user_profile',
+                    #'user_profile',
                     'rest_framework'
                     ]
+
+# Django-allAuth Configuration
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+
+LOGIN_URL='/accounts/login/'
+LOGIN_REDIRECT_URL='/'

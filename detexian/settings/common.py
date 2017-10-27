@@ -43,6 +43,7 @@ sys.path.append(normpath(join(PROJECT_ROOT, 'apps')))
 DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -60,6 +61,14 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 # Template stuff
 TEMPLATES = [
@@ -82,7 +91,7 @@ TEMPLATES = [
     },
 ]
 
-AUTH_USER_MODEL = 'user_profile.Profile'
+# AUTH_USER_MODEL = 'user_profile.Profile'
 
 # ##### SECURITY CONFIGURATION ############################
 
@@ -132,7 +141,6 @@ USE_L10N = True
 
 # enable timezone awareness by default
 USE_TZ = True
-
 
 # Finally grab the SECRET KEY
 try:
