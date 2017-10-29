@@ -12,8 +12,12 @@ DEBUG = True
 # ##### DATABASE CONFIGURATION ############################
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': join(PROJECT_ROOT, 'run', 'dev.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'detexian',
+        'USER': 'detexian',
+        'PASSWORD': 'detexian',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -25,7 +29,8 @@ INSTALLED_APPS = DEFAULT_APPS + \
 				    'allauth.account',
 				    'allauth.socialaccount',
                     'alerts',
-                    #'user_profile',
+                    'dashboard',
+                    'hosts',
                     'rest_framework'
                     ]
 

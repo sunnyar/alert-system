@@ -24,14 +24,13 @@ class Alert(models.Model):
 		("Critical", "CRITICAL"),
 	)
 
-	client_id = models.GenericIPAddressField()
+
+	client_id = models.CharField(max_length=100, null=True, blank=True)
 	name = models.CharField(max_length=100, null=True, blank=True)
-	created_at = models.DateTimeField(default=partial(timezone.localtime, timezone.now()), 
-					null=True)
+	created_at = models.DateTimeField(auto_now_add=True, null=True)
 	event = models.ManyToManyField("Event", blank=True)
 	reviewer = models.CharField(max_length=100, null=True, blank=True)
-	review_time = models.DateTimeField(default=partial(timezone.localtime, timezone.now()),
-					null=True, blank=True)
+	review_time = models.DateTimeField(null=True, blank=True)
 	status = models.CharField(max_length=20, choices=ALERT_STATUS, default="Unreviewed")
 	severity = models.CharField(max_length=10, choices=ALERT_SEVERITY, default="Low")
 
@@ -41,6 +40,12 @@ class Alert(models.Model):
 	class Meta:
 		ordering = ('-created_at',)
 		db_table = 'Alert'
+
+	def alert_server(self):
+		return self.client_id.split('-')[0]
+
+	def alert_user(self):
+		return self.client_id.split('-')[1]
 
 
 class Event(models.Model):

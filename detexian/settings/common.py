@@ -91,7 +91,6 @@ TEMPLATES = [
     },
 ]
 
-# AUTH_USER_MODEL = 'user_profile.Profile'
 
 # ##### SECURITY CONFIGURATION ############################
 
@@ -140,7 +139,7 @@ USE_I18N = True
 USE_L10N = True
 
 # enable timezone awareness by default
-USE_TZ = True
+USE_TZ = False
 
 # Finally grab the SECRET KEY
 try:

@@ -1,5 +1,4 @@
 {% load static %}
-{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,12 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
-	<title>{% block head_title %}{% trans "Detexian Dashbord" %}{% endblock %}</title>
+	<title>Detexian Dashbord</title>
 	<link rel="stylesheet" href="{% static 'assets/css/vendor.bundle.css' %}">
 	<link rel="stylesheet" href="{% static 'assets/css/app.bundle.css' %}">
 	<link rel="stylesheet" href="{% static 'assets/css/theme-a.css' %}">
 </head>
-
 <body>
 	<div id="app_wrapper">
 		<header id="app_topnavbar-wrapper">
@@ -33,7 +31,7 @@
               </a>
             </li>
             <li>
-              <a href="{% url 'alert-list' %}" class="nav-link">
+              <a href="alert.html" class="nav-link">
                 <span>Alert</span>
               </a>
             </li>
@@ -74,23 +72,23 @@
 									<a href="javascript:void(0)"><i class="zmdi zmdi-settings"></i> Account Settings</a>
 								</li>
 								<li>
-									<a href="{% url 'account_logout' %}"><i class="zmdi zmdi-sign-in"></i> Sign Out</a>
+									<a href="javascript:void(0)"><i class="zmdi zmdi-sign-in"></i> Sign Out</a>
 								</li>
 							</ul>
 						</li>
 						
 						<li>
-							<a href="javascript:void(0)" data-navsearch-open>
+							<a href="javascript:void(0)" data-navsearch-open="">
 								<i class="zmdi zmdi-search"></i>
-							</a>
+							<div class="ripple-container"></div></a>
 						</li>
 						
 					</ul>
 				</div>
 				<form role="search" action="" class="navbar-form" id="navbar_form">
-					<div class="form-group">
+					<div class="form-group is-empty">
 						<input type="text" placeholder="Search and press enter..." class="form-control" id="navbar_search" autocomplete="off">
-						<i data-navsearch-close class="zmdi zmdi-close close-search"></i>
+						<i data-navsearch-close="" class="zmdi zmdi-close close-search"></i>
 					</div>
 					<button type="submit" class="hidden btn btn-default">Submit</button>
 				</form>
@@ -113,27 +111,25 @@
 					</li>
 				</ul>
 			</div>
-			<nav id="app_main-menu-wrapper" class="scrollbar">
+			<nav id="app_main-menu-wrapper" class="scrollbar mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar" style="overflow: visible;"><div id="mCSB_1" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" style="max-height: none;" tabindex="0"><div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
 				<div class="sidebar-inner sidebar-push">
 					<ul class="nav nav-pills nav-stacked">
 						<li class="sidebar-header">NAVIGATION</li>
 						<li class="active"><a href="index.html"><i class="zmdi zmdi-view-dashboard"></i>Dashboard</a></li>
-						<li><a href="#"><i class="zmdi zmdi-account"></i>Profile</a></li>
-						<li><a href="{% url 'account_logout'"><i class="zmdi zmdi-account"></i>Logout</a></li>
+						<li><a href="#"><i class="zmdi zmdi-search"></i>Search</a></li>
+						
 						</ul>
 					</div>
-				</nav>
+				</div></div><div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; height: 0px; top: 0px;"><div class="mCSB_dragger_bar" style="line-height: 50px;"></div></div><div class="mCSB_draggerRail"></div></div></div></nav>
 			</aside>
-
-			<section id="content_outer_wrapper" class="">
-				<div id="content_wrapper" >
-					{% block content %}
+			<section id="content_outer_wrapper" class="no-padding">
+				<div id="content_wrapper">
 					<div id="header_wrapper" class="header-sm">
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-xs-12">
 									<header id="header">
-										<h1>Dashboards</h1>
+										<h1>ALERTS</h1>
 									</header>
 								</div>
 							</div>
@@ -146,119 +142,48 @@
 							<div id="dashboard_content" class="tab-content">
 								<div class="tab-pane fade active in" id="dashboard1">
 									<div class="row">
-										<div class="col-xs-12 col-sm-6">
-                <div class="card">
-                  <header class="card-heading ">
-                    <h2 class="card-title">List Group with Icons</h2>
-                    <ul class="card-actions icons right-top">
-                      <li>
-                        <a href="javascript:void(0)" data-toggle-view="code">
-                          <i class="zmdi zmdi-code"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </header>
-                  <div class="card-body">
-                    <div class="list-group m-t-40">
-                      <div class="list-group-item">
-                        <div class="row-action-primary">
-                          <i class="zmdi zmdi-folder circle mw-salmon"></i>
-                        </div>
-                        <div class="row-content">
-                          <h4 class="list-group-item-heading">List item with icon</h4>
-                          <p class="list-group-item-text">Fashion axe kitsch marfa, art party gluten-free beard meditation lumbersexual pinterest sapiente. Paleo flexitarian bushwick letterpress, ea migas yr adipisicing. Man bun tacos tumblr kombucha, yuccie banjo.</p>
-                        </div>
-                      </div>
-                      <div class="list-group-item">
-                        <div class="row-action-primary">
-                          <i class="zmdi zmdi-folder circle mw-salmon"></i>
-                        </div>
-                        <div class="row-content">
-                          <h4 class="list-group-item-heading">List item with icon</h4>
-                          <p class="list-group-item-text">Fashion axe kitsch marfa, art party gluten-free beard meditation lumbersexual pinterest sapiente. Paleo flexitarian bushwick letterpress, ea migas yr adipisicing. Man bun tacos tumblr kombucha, yuccie banjo.</p>
-                        </div>
-                      </div>
-                      <div class="list-group-item">
-                        <div class="row-action-primary">
-                          <i class="zmdi zmdi-folder circle mw-salmon"></i>
-                        </div>
-                        <div class="row-content">
-                          <h4 class="list-group-item-heading">List item with icon</h4>
-                          <p class="list-group-item-text">Fashion axe kitsch marfa, art party gluten-free beard meditation lumbersexual pinterest sapiente. Paleo flexitarian bushwick letterpress, ea migas yr adipisicing. Man bun tacos tumblr kombucha, yuccie banjo.</p>
-                        </div>
-                      </div>
-                      <div class="list-group-item">
-                        <div class="row-action-primary">
-                          <i class="zmdi zmdi-folder circle mw-salmon"></i>
-                        </div>
-                        <div class="row-content">
-                          <h4 class="list-group-item-heading">List item with icon</h4>
-                          <p class="list-group-item-text">Fashion axe kitsch marfa, art party gluten-free beard meditation lumbersexual pinterest sapiente. Paleo flexitarian bushwick letterpress, ea migas yr adipisicing. Man bun tacos tumblr kombucha, yuccie banjo.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-										<div class="col-xs-12 col-sm-6">
-                <div class="card">
-                  <header class="card-heading ">
-                    <h2 class="card-title">List Group with Avatars</h2>
-                    <ul class="card-actions icons right-top">
-                      <li>
-                        <a href="javascript:void(0)" data-toggle-view="code">
-                          <i class="zmdi zmdi-code"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </header>
-                  <div class="card-body">
-                    <div class="list-group m-t-40">
-                      <div class="list-group-item">
-                        <div class="row-action-primary">
-                          <img src="{% static 'assets/img/profiles/11.jpg' %}" alt="contact person" class="img-circle circle">
-                        </div>
-                        <div class="row-content">
-                          <div class="least-content"><a href="javascript:void" data-toggle="tooltip" data-placement="left" title="" data-original-title="More Info"><i class="zmdi zmdi-info"></i></a></div>
-                          <h4 class="list-group-item-heading">List item with icon</h4>
-                          <p class="list-group-item-text">Fashion axe kitsch marfa, art party gluten-free beard meditation lumbersexual pinterest sapiente. Paleo flexitarian bushwick letterpress, ea migas yr adipisicing. Man bun tacos tumblr kombucha, yuccie banjo.</p>
-                        </div>
-                      </div>
-                      <div class="list-group-item">
-                        <div class="row-action-primary">
-                          <img src="{% static 'assets/img/profiles/08.jpg' %}" alt="contact person" class="img-circle circle">
-                        </div>
-                        <div class="row-content">
-                          <div class="least-content"><a href="javascript:void" data-toggle="tooltip" data-placement="left" title="" data-original-title="More Info"><i class="zmdi zmdi-info"></i></a></div>
-                          <h4 class="list-group-item-heading">List item with icon</h4>
-                          <p class="list-group-item-text">Fashion axe kitsch marfa, art party gluten-free beard meditation lumbersexual pinterest sapiente. Paleo flexitarian bushwick letterpress, ea migas yr adipisicing. Man bun tacos tumblr kombucha, yuccie banjo.</p>
-                        </div>
-                      </div>
-                      <div class="list-group-item">
-                        <div class="row-action-primary">
-                          <img src="{% static 'assets/img/profiles/07.jpg' %}" alt="contact person" class="img-circle circle">
-                        </div>
-                        <div class="row-content">
-                          <div class="least-content"><a href="javascript:void" data-toggle="tooltip" data-placement="left" title="" data-original-title="More Info"><i class="zmdi zmdi-info"></i></a></div>
-                          <h4 class="list-group-item-heading">List item with icon</h4>
-                          <p class="list-group-item-text">Fashion axe kitsch marfa, art party gluten-free beard meditation lumbersexual pinterest sapiente. Paleo flexitarian bushwick letterpress, ea migas yr adipisicing. Man bun tacos tumblr kombucha, yuccie banjo.</p>
-                        </div>
-                      </div>
-                      <div class="list-group-item">
-                        <div class="row-action-primary">
-                          <img src="{% static 'assets/img/profiles/13.jpg' %}" alt="contact person" class="img-circle circle">
-                        </div>
-                        <div class="row-content">
-                          <div class="least-content"><a href="javascript:void" data-toggle="tooltip" data-placement="left" title="" data-original-title="More Info"><i class="zmdi zmdi-info"></i></a></div>
-                          <h4 class="list-group-item-heading">List item with icon</h4>
-                          <p class="list-group-item-text">Fashion axe kitsch marfa, art party gluten-free beard meditation lumbersexual pinterest sapiente. Paleo flexitarian bushwick letterpress, ea migas yr adipisicing. Man bun tacos tumblr kombucha, yuccie banjo.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
 										
+										<div class="col-xs-12 col-sm-12">
+                <div class="card">
+                  <div class="card-body">
+                   <div class="table-responsive">
+                        <table class="table table-striped">
+                          <thead>
+                            
+                          </thead>
+                          <tbody>
+                          	<tr>
+                          		<td><b>Total Alerts :</b> {{alert_list.count}}</td>
+                          	</tr>
+                          	<tr>
+                          		<td><b>Last 30 Days Alerts :</b> {{last_30_days_alerts_count}}</td>
+                          	</tr>
+                          	<tr>
+                          		<td><b>Today's Alerts :</b> {{today_alerts_count}}</td>
+                          	</tr>
+                          	{% if most_20_recent_alerts %}
+	                            <tr>
+	                            	<td><b>Most Recent Alerts :</b></td>
+	                            </tr>
+	                        {% endif %}
+                            <tr>
+                              	{% for alert in most_20_recent_alerts %}
+	                              	<td>User: {{alert.alert_user}} logged-in on Server: {{alert.alert_server}} as {% if 'ROOT' in alert.name %}ROOT-USER {%endif%} {% if 'FIRST' in alert.name%}for first time {%endif%}at {{alert.created_at}} {% if 'BRUTEFORCE' in alert.name%}with 10 or more failed logins in last 24 hours{%endif%}
+                          			</td>
+                              	{% if forloop.counter|divisibleby:4 %}
+                            </tr>
+                        	<tr>
+							    {% endif %}
+
+							    {% endfor %}
+						    </tr>
+            
+                          </tbody>
+                        </table>
+                      </div>
+                  </div>
+                </div>
+              </div>
 									</div>
 									
 									<div class="tab-pane fade" id="dashboard2">
@@ -357,8 +282,8 @@
 													<div class="card type--scheduler ">
 														<header class="card-heading">
 															<div class="curr-date">
-																<h3 class="curr-dd text-white"></h3>
-																<h5 class="curr-mmmm-dd text-white"></h5>
+																<h3 class="curr-dd text-white">Tuesday,</h3>
+																<h5 class="curr-mmmm-dd text-white">October 24<sup>th</sup></h5>
 															</div>
 															<ul class="card-actions icons  alt-actions right-top">
 																<li>
@@ -373,7 +298,7 @@
 																</li>
 															</ul>
 														</header>
-														<div class="card-body clear-both p-0 max-h-500 scrollbar">
+														<div class="card-body clear-both p-0 max-h-500 scrollbar mCustomScrollbar _mCS_2 mCS-autoHide mCS_no_scrollbar" style="position: relative; overflow: visible;"><div id="mCSB_2" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" style="max-height: none;" tabindex="0"><div id="mCSB_2_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
 															<div class="week-container">
 																<ul class="week top">
 																	<li class="day day-names"><span>sun</span></li>
@@ -396,28 +321,28 @@
 															</div>
 															<ul class="list-group p-0">
 																<li class="list-group-item border-top p-t-20 p-b-20">
-																	<span class="pull-left"><img src="{% static 'assets/img/profiles/01.jpg' %}" alt="" class="img-circle max-w-50 m-r-10"></span>
+																	<span class="pull-left"><img src="{% static 'assets/img/profiles/01.jpg' %}" alt="" class="img-circle max-w-50 m-r-10 mCS_img_loaded"></span>
 																	<div class="list-group-item-body">
 																		<div class="list-group-item-heading">Design meeting with Melissa</div>
 																		<div class="list-group-item-text">8:00 - 10:30am</div>
 																	</div>
 																</li>
 																<li class="list-group-item border-top p-t-20 p-b-20">
-																	<span class="pull-left"><img src="{% static 'assets/img/profiles/04.jpg' %}" alt="" class="img-circle max-w-50 m-r-10"></span>
+																	<span class="pull-left"><img src="{% static 'assets/img/profiles/04.jpg' %}" alt="" class="img-circle max-w-50 m-r-10 mCS_img_loaded"></span>
 																	<div class="list-group-item-body">
 																		<div class="list-group-item-heading">Review mockups with Janet </div>
 																		<div class="list-group-item-text">10:15 - 11:30am Hangouts</div>
 																	</div>
 																</li>
 																<li class="list-group-item border-top p-t-20 p-b-20">
-																	<span class="pull-left"><img src="{% static 'assets/img/profiles/18.jpg' %}" alt="" class="img-circle max-w-50 m-r-10"></span>
+																	<span class="pull-left"><img src="{% static 'assets/img/profiles/18.jpg' %}" alt="" class="img-circle max-w-50 m-r-10 mCS_img_loaded"></span>
 																	<div class="list-group-item-body">
 																		<div class="list-group-item-heading">Catch up with Michael</div>
 																		<div class="list-group-item-text">8:30pm Lost Forty Brewing</div>
 																	</div>
 																</li>
 															</ul>
-														</div>
+														</div></div><div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; height: 0px; top: 0px;"><div class="mCSB_dragger_bar" style="line-height: 50px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div>
 													</div>
 												</div>
 											</div>
@@ -426,7 +351,6 @@
 									<!-- ENDS $dashboard_content -->
 								</div>
 							</div>
-							{% endblock %}
 							<!-- ENDS $content -->
 							
 </div>
@@ -465,7 +389,7 @@
 			</div>
 			<div class="row copy-wrapper">
 				<div class="col-xs-8">
-					<p class="copy">&copy; Copyright <time class="year"></time> Detexian - All Rights Reserved</p>
+					<p class="copy">© Copyright <time class="year">2017</time> Detexian - All Rights Reserved</p>
 				</div>
 				<div class="col-xs-4">
 					<ul class="social">
@@ -486,8 +410,7 @@
 			</div>
 		</div>
 	</footer>
-</section>
-
+</div></section>
 <aside id="app_sidebar-right">
 	<div class="sidebar-inner sidebar-overlay">
 		<div class="tabpanel">
@@ -642,7 +565,7 @@
 							<div class="item-info">
 								<small class="text-muted">5 hours ago</small>
 								<p><a href="javascript:void(0)" class="accent">Neal Stephens</a> setup a meeting with<a href="#" class="text-success"> Jason Kendall</a>.</p>
-								<p><em>"Authentic aesthetic tattooed, PBR&B squid tote bag schlitz vaporware glossier yr man braid direct trade disrupt poke.  "</em></p>
+								<p><em>"Authentic aesthetic tattooed, PBR&amp;B squid tote bag schlitz vaporware glossier yr man braid direct trade disrupt poke.  "</em></p>
 							</div>
 						</div>
 					</div>
@@ -761,10 +684,10 @@
 						<h3 class="title m-t-30">Layout Mode</h3>
 						<ul class="description">
 							<li>
-								<div class="radio block"><label><input type="radio" name="layoutMode" value="" checked>FULL WIDTH</label></div>
+								<div class="radio block"><label><input type="radio" name="layoutMode" value="" checked=""><span class="circle"></span><span class="check"></span>FULL WIDTH</label></div>
 							</li>
 							<li>
-								<div class="radio block"><label><input type="radio" name="layoutMode" value="boxed-layout">BOXED</label></div>
+								<div class="radio block"><label><input type="radio" name="layoutMode" value="boxed-layout"><span class="circle"></span><span class="check"></span>BOXED</label></div>
 							</li>
 						</ul>
 					</div>
@@ -805,54 +728,54 @@
 			</li>
 		</ul>
 	</div>
-	<div class='chat-wrapper scrollbar'>
-		<div class='chat-message scrollbar'>
-			<div class='chat-message chat-message-recipient'>
-				<img class='chat-image chat-image-default' src='assets/img/profiles/05.jpg' />
-				<div class='chat-message-wrapper'>
-					<div class='chat-message-content'>
+	<div class="chat-wrapper scrollbar mCustomScrollbar _mCS_3 mCS-autoHide mCS_no_scrollbar" style="position: relative; overflow: visible;"><div id="mCSB_3" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" style="max-height: none;" tabindex="0"><div id="mCSB_3_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+		<div class="chat-message scrollbar mCustomScrollbar _mCS_4 mCS-autoHide mCS_no_scrollbar" style="position: relative; overflow: visible;"><div id="mCSB_4" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" style="max-height: none;" tabindex="0"><div id="mCSB_4_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+			<div class="chat-message chat-message-recipient">
+				<img class="chat-image chat-image-default mCS_img_loaded" src="{% static 'assets/img/profiles/05.jpg' %}">
+				<div class="chat-message-wrapper">
+					<div class="chat-message-content">
 						<p>Hey Mike, we have funding for our new project!</p>
 					</div>
-					<div class='chat-details'>
-						<span class='today small'></span>
+					<div class="chat-details">
+						<span class="today small">10/24/2017</span>
 					</div>
 				</div>
 			</div>
-			<div class='chat-message chat-message-sender'>
-				<img class='chat-image chat-image-default' src='assets/img/profiles/02.jpg' />
-				<div class='chat-message-wrapper '>
-					<div class='chat-message-content'>
+			<div class="chat-message chat-message-sender">
+				<img class="chat-image chat-image-default mCS_img_loaded" src="{% static 'assets/img/profiles/02.jpg' %}">
+				<div class="chat-message-wrapper ">
+					<div class="chat-message-content">
 						<p>Awesome! Photo booth banh mi pitchfork kickstarter whatever, prism godard ethical 90's cray selvage.</p>
 					</div>
-					<div class='chat-details'>
-						<span class='today small'></span>
+					<div class="chat-details">
+						<span class="today small">10/24/2017</span>
 					</div>
 				</div>
 			</div>
-			<div class='chat-message chat-message-recipient'>
-				<img class='chat-image chat-image-default' src='assets/img/profiles/05.jpg' />
-				<div class='chat-message-wrapper'>
-					<div class='chat-message-content'>
+			<div class="chat-message chat-message-recipient">
+				<img class="chat-image chat-image-default mCS_img_loaded" src="{% static 'assets/img/profiles/05.jpg' %}">
+				<div class="chat-message-wrapper">
+					<div class="chat-message-content">
 						<p> Artisan glossier vaporware meditation paleo humblebrag forage small batch.</p>
 					</div>
-					<div class='chat-details'>
-						<span class='today small'></span>
+					<div class="chat-details">
+						<span class="today small">10/24/2017</span>
 					</div>
 				</div>
 			</div>
-			<div class='chat-message chat-message-sender'>
-				<img class='chat-image chat-image-default' src='assets/img/profiles/02.jpg' />
-				<div class='chat-message-wrapper'>
-					<div class='chat-message-content'>
+			<div class="chat-message chat-message-sender">
+				<img class="chat-image chat-image-default mCS_img_loaded" src="{% static 'assets/img/profiles/02.jpg' %}">
+				<div class="chat-message-wrapper">
+					<div class="chat-message-content">
 						<p>Bushwick letterpress vegan craft beer dreamcatcher kickstarter.</p>
 					</div>
-					<div class='chat-details'>
-						<span class='today small'></span>
+					<div class="chat-details">
+						<span class="today small">10/24/2017</span>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+		</div></div><div id="mCSB_4_scrollbar_vertical" class="mCSB_scrollTools mCSB_4_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_4_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; height: 0px; top: 0px;"><div class="mCSB_dragger_bar" style="line-height: 50px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div>
+	</div></div><div id="mCSB_3_scrollbar_vertical" class="mCSB_scrollTools mCSB_3_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: none;"><div class="mCSB_draggerContainer"><div id="mCSB_3_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; height: 0px; top: 0px;"><div class="mCSB_dragger_bar" style="line-height: 50px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div>
 	<footer id="compose-footer">
 		<form class="form-horizontal compose-form">
 			<ul class="card-actions icons left-bottom">
@@ -886,7 +809,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 				<h4 class="modal-title" id="myModalLabel-2">Title goes here</h4>
 			</div>
 			<div class="modal-body">
@@ -903,6 +826,12 @@
 		<!-- modal-dialog -->
 	</div>
 	
+
+
+	<script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
+	<script src="{% static 'assets/js/app.bundle.js' %}"></script>
+
+
 </body>
 
 	<script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
