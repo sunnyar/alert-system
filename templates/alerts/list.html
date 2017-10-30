@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
-	<title>Detexian Dashbord</title>
+	<title>{% block head_title %}{% trans "Detexian Dashbord" %}{% endblock %}</title>
 	<link rel="stylesheet" href="{% static 'assets/css/vendor.bundle.css' %}">
 	<link rel="stylesheet" href="{% static 'assets/css/app.bundle.css' %}">
 	<link rel="stylesheet" href="{% static 'assets/css/theme-a.css' %}">
@@ -26,12 +27,12 @@
 					</ul>
 					<ul class="nav navbar-nav left-menu hidden-xs">
             <li>
-              <a href="javascript:void(0)" class="nav-link">
+              <a href="/" class="nav-link">
                 <span>Home</span>
               </a>
             </li>
             <li>
-              <a href="alert.html" class="nav-link">
+              <a href="javascript:void(0)" class="nav-link">
                 <span>Alert</span>
               </a>
             </li>
@@ -72,7 +73,7 @@
 									<a href="javascript:void(0)"><i class="zmdi zmdi-settings"></i> Account Settings</a>
 								</li>
 								<li>
-									<a href="javascript:void(0)"><i class="zmdi zmdi-sign-in"></i> Sign Out</a>
+									<a href="{% url 'account_logout' %}"><i class="zmdi zmdi-sign-in"></i> Sign Out</a>
 								</li>
 							</ul>
 						</li>
@@ -161,14 +162,42 @@
                           	<tr>
                           		<td><b>Today's Alerts :</b> {{today_alerts_count}}</td>
                           	</tr>
+                          </tbody>
+                        </table>
+                        <table class="table table-striped">
+                          <thead>
                           	{% if most_20_recent_alerts %}
 	                            <tr>
 	                            	<td><b>Most Recent Alerts :</b></td>
 	                            </tr>
 	                        {% endif %}
                             <tr>
+                                <th> Name </th>
+                                <th> Server </th>
+                                <th> Date </th>
+                                <th> Logged-in User </th>
+                                <th> Resolution Status </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for alert in most_20_recent_alerts %}
+                                <tr>
+	                                <td> {{alert.name}} </td>
+	                                <td> {{alert.alert_server}} </td>
+	                                <td> {{alert.created_at}} </td>
+	                                <td> {{alert.alert_user}} </td>
+	                                <td> {{alert.status}} </td>
+	                            </tr>
+	                            {% endfor %}
+
+                            <!-- {% if most_20_recent_alerts %}
+	                            <tr>
+	                                <td><b>Most Recent Alerts :</b></td>
+	                            </tr>
+	                        {% endif %}
+                            <tr>
                               	{% for alert in most_20_recent_alerts %}
-	                              	<td>User: {{alert.alert_user}} logged-in on Server: {{alert.alert_server}} as {% if 'ROOT' in alert.name %}ROOT-USER {%endif%} {% if 'FIRST' in alert.name%}for first time {%endif%}at {{alert.created_at}} {% if 'BRUTEFORCE' in alert.name%}with 10 or more failed logins in last 24 hours{%endif%}
+	                                <td>User: {{alert.alert_user}} logged-in on Server: {{alert.alert_server}} {% if 'ROOT' in alert.name %}as ROOT-USER {%endif%} {% if 'FIRST' in alert.name%}for first time {%endif%}at {{alert.created_at}} {% if 'BRUTEFORCE' in alert.name%}with 10 or more failed logins in last 24 hours{%endif%}
                           			</td>
                               	{% if forloop.counter|divisibleby:4 %}
                             </tr>
@@ -177,7 +206,7 @@
 
 							    {% endfor %}
 						    </tr>
-            
+             -->
                           </tbody>
                         </table>
                       </div>
@@ -825,12 +854,6 @@
 		</div>
 		<!-- modal-dialog -->
 	</div>
-	
-
-
-	<script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
-	<script src="{% static 'assets/js/app.bundle.js' %}"></script>
-
 
 </body>
 

@@ -35,15 +35,15 @@ class HostListCreateAPIView(ListCreateAPIView):
 			name = ""
 			if Host.objects.filter(server_ip=server_ip, username=username).exists():
 				if request.data["login_type"] == "root":
-					name = "ROOT USER LOGIN"
+					name = "ROOT LOGIN"
 			else:
 				if request.data["login_type"] == "root":
-					name = "ROOT USER FIRST LOGIN"
+					name = "ROOT FIRST LOGIN"
 				else:
-					name = "USER FIRST LOGIN"
+					name = "FIRST LOGIN"
 
-			if int(request.data["failed_attempts"]) >= 10:
-				name = "BRUTEFORCE" + name
+			if name and int(request.data["failed_attempts"]) >= 10:
+				name = "BRUTEFORCE " + name
 
 			if name:
 				Alert.objects.create(
