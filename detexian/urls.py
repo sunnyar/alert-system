@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 
 from rest_framework.authtoken.views import obtain_auth_token
 
-from dashboard.views import Dashboard
+from dashboard.views import DashboardView
 from alerts.views import AlertListView
 
 
@@ -16,7 +16,7 @@ urlpatterns = [
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', Dashboard.as_view(), name="index"),
+    url(r'^$', DashboardView.as_view(), name="index"),
     url(r'^alerts/$', AlertListView.as_view(), name="alert-list"),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^api/host/', include('hosts.api.urls')),

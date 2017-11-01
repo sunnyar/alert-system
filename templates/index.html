@@ -87,9 +87,9 @@
 						
 					</ul>
 				</div>
-				<form role="search" action="" class="navbar-form" id="navbar_form">
+				<form role="search" method="get" action="" class="navbar-form" id="navbar_form">
 					<div class="form-group">
-						<input type="text" placeholder="Search and press enter..." class="form-control" id="navbar_search" autocomplete="off">
+						<input type="text" placeholder="Search and press enter..." class="form-control" id="navbar_search" autocomplete="off" name="q">
 						<i data-navsearch-close class="zmdi zmdi-close close-search"></i>
 					</div>
 					<button type="submit" class="hidden btn btn-default">Submit</button>
@@ -119,7 +119,7 @@
 						<li class="sidebar-header">NAVIGATION</li>
 						<li class="active"><a href="index.html"><i class="zmdi zmdi-view-dashboard"></i>Dashboard</a></li>
 						<li><a href="#"><i class="zmdi zmdi-account"></i>Profile</a></li>
-						<li><a href="{% url 'account_logout'"><i class="zmdi zmdi-account"></i>Logout</a></li>
+						<li><a href="{% url 'account_logout' %}"><i class="zmdi zmdi-account"></i>Logout</a></li>
 						</ul>
 					</div>
 				</nav>
@@ -146,6 +146,185 @@
 							<div id="dashboard_content" class="tab-content">
 								<div class="tab-pane fade active in" id="dashboard1">
 									<div class="row">
+										<div class="col-xs-12 col-sm-6">
+							                <div class="card">
+							                  <div class="card-heading">Events</div>
+							                  <div class="card-body">
+							                   <div class="table-responsive">
+							                   		{% if event_list %}
+							                        <table class="table table-striped">
+							                          <thead>
+							                            <tr>
+							                                <th> Total </th>
+							                                <th> Last Hour </th>
+							                                <th> This Week </th>
+							                                <th> This Month </th>
+							                            </tr>
+							                          </thead>
+							                          <tbody>
+							                                <tr>
+								                                <td> {{event_list.count}} </td>
+								                                <td> {{hourly_events}} </td>
+								                                <td> {{weekly_events}} </td>
+								                                <td> {{monthly_events}} </td>
+								                            </tr>
+							                          </tbody>
+							                        </table>
+							                        {% else %}
+							                        	<p>No events logged !</p>
+							                        {% endif %}
+							                    </div>
+							                  </div>
+							                </div>
+							            </div>
+
+							            <div class="col-xs-12 col-sm-6">
+							                <div class="card">
+							                  <div class="card-heading">Alerts</div>
+							                  <div class="card-body">
+							                   <div class="table-responsive">
+							                   		{% if alert_list %}
+							                        <table class="table table-striped">
+							                          <thead>
+							                            <tr>
+							                                <th> Total </th>
+							                                <th> Last 30 days </th>
+							                                <th> Today </th>
+							                            </tr>
+							                          </thead>
+							                          <tbody>
+							                                <tr>
+								                                <td> {{alert_list|length}} </td>
+								                                <td> {{last_30_days_alerts_count}} </td>
+								                                <td> {{today_alerts_count}} </td>
+								                            </tr>
+							                          </tbody>
+							                        </table>
+							                        {% else %}
+							                        	<p>No events logged !</p>
+							                        {% endif %}
+							                    </div>
+							                  </div>
+							                </div>
+							            </div>
+							            {% if most_20_recent_alerts %}
+										<div class="col-xs-12 col-sm-12">
+							                <div class="card">
+							                  <div class="card-heading">Most Recent Alerts</div>
+							                  <div class="card-body">
+							                   <div class="table-responsive">
+							                        <table class="table table-striped">
+							                          <thead>
+							                            <tr>
+							                                <th> Name </th>
+							                                <th> Server </th>
+							                                <th> Date </th>
+							                                <th> Logged-in User </th>
+							                                <th> Resolution Status </th>
+							                            </tr>
+							                          </thead>
+							                          <tbody>
+							                            {% for alert in alert_list|slice:":21" %}
+							                                <tr>
+								                                <td> {{alert.name}} </td>
+								                                <td> {{alert.alert_server}} </td>
+								                                <td> {{alert.created_at}} </td>
+								                                <td> {{alert.alert_user}} </td>
+								                                <td> {{alert.status}} </td>
+								                            </tr>
+								                        {% endfor %}
+							                          </tbody>
+							                        </table>
+							                      </div>
+							                  </div>
+							                </div>
+							            </div>
+							            {% endif %}
+
+							            <div class="col-xs-12 col-sm-12">
+							                <div class="card">
+							                  <div class="card-heading">Reporting Hosts</div>
+							                  <div class="card-body">
+							                   <div class="table-responsive">
+							                        <table class="table table-striped">
+							                          <thead>
+							                            <tr>
+							                                <th> S No. </th>
+							                                <th> Host IP </th>
+							                            </tr>
+							                          </thead>
+							                          <tbody>
+							                            {% for host in host_list %}
+							                                <tr>
+								                                <td> {{forloop.counter}} </td>
+								                                <td> {{host.server_ip}} </td>
+								                            </tr>
+								                        {% endfor %}
+							                          </tbody>
+							                        </table>
+							                      </div>
+							                  </div>
+							                </div>
+							            </div>
+
+							            <div class="col-xs-12 col-sm-6">
+							                <div class="card">
+							                  <div class="card-heading">Incoming External IP's</div>
+							                  <div class="card-body">
+							                   <div class="table-responsive">
+							                        <table class="table table-striped">
+							                          <thead>
+							                            <tr>
+							                                <th> Last Hour </th>
+							                                <th> Today </th>
+							                                <th> This Week </th>
+							                                <th> This Month </th>
+							                            </tr>
+							                          </thead>
+							                          <tbody>
+							                                <tr>
+								                                <td> 1 </td>
+								                                <td> 2 </td>
+								                                <td> 6 </td>
+								                                <td> 8 </td>
+								                            </tr>
+							                          </tbody>
+							                        </table>
+							                      </div>
+							                  </div>
+							                </div>
+							            </div>
+
+							            <div class="col-xs-12 col-sm-6">
+							                <div class="card">
+							                  <div class="card-heading">Outgoing External IP's</div>
+							                  <div class="card-body">
+							                   <div class="table-responsive">
+							                        <table class="table table-striped">
+							                          <thead>
+							                            <tr>
+							                                <th> Last Hour </th>
+							                                <th> Today </th>
+							                                <th> This Week </th>
+							                                <th> This Month </th>
+							                            </tr>
+							                          </thead>
+							                          <tbody>
+							                                <tr>
+							                                	<td> 4 </td>
+								                                <td> 5 </td>
+								                                <td> 8 </td>
+								                                <td> 15 </td>
+								                            </tr>
+							                          </tbody>
+							                        </table>
+							                      </div>
+							                  </div>
+							                </div>
+							            </div>
+
+
+									<!--div class="row">
 										<div class="col-xs-12 col-sm-6">
                 <div class="card">
                   <header class="card-heading ">
@@ -259,7 +438,7 @@
                 </div>
               </div>
 										
-									</div>
+									</div-->
 									
 									<div class="tab-pane fade" id="dashboard2">
 										<div class="row">
