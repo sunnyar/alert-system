@@ -87,9 +87,9 @@
 						
 					</ul>
 				</div>
-				<form role="search" method="get" action="" class="navbar-form" id="navbar_form">
+				<form role="search" action="/" method="post" class="navbar-form" id="navbar_form">{% csrf_token %}
 					<div class="form-group">
-						<input type="text" placeholder="Search and press enter..." class="form-control" id="navbar_search" autocomplete="off" name="q">
+						<input type="text" placeholder="Search and press enter..." class="form-control" id="navbar_search" autocomplete="off">
 						<i data-navsearch-close class="zmdi zmdi-close close-search"></i>
 					</div>
 					<button type="submit" class="hidden btn btn-default">Submit</button>
@@ -207,7 +207,7 @@
 							                  </div>
 							                </div>
 							            </div>
-							            {% if most_20_recent_alerts %}
+							            {% if alert_list|slice:":21" %}
 										<div class="col-xs-12 col-sm-12">
 							                <div class="card">
 							                  <div class="card-heading">Most Recent Alerts</div>
@@ -1086,5 +1086,28 @@
 
 	<script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
 	<script src="{% static 'assets/js/app.bundle.js' %}"></script>
+	<script>
+		$(document).ready(function(){
+			$("#navbar_form").on("submit", function(e){
+		      $.ajax({
+		        url: '/',
+		        type: 'POST',
+		        data: {
+		          'search_text': $('#navbar_search').val(),
+		          'csrfmiddlewaretoken': '{{ csrf_token }}'
+		        },
+		        success: function(data) {
+		          console.log(data);
+		          console.log("Search Form Successfully");
+		        },
+		        error : function() {
+		          console.log("Error submitting search form");
+		        }
+
+		      });
+		      return false;
+		    });
+		});
+	</script>
 
 </html>
