@@ -1,5 +1,6 @@
 # Import sys (to adjust Python path)
 import sys
+import os
 # Import some utility functions
 from os.path import abspath, basename, dirname, join, normpath
 

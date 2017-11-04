@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Alerts" %}{% endblock %}
+
+{% block content %}
+
+  <div id="header_wrapper" class="header-sm">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12">
+          <header id="header">
+            <h1>{% trans "SEARCH ALERTS" %}</h1>
+          </header>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="content" class="container-fluid">
+    <div class="content-body">
+      <div id="dashboard_content" class="tab-content">
+        <div class="tab-pane fade active in" id="dashboard1">
+          <div class="row">                
+            <div class="col-xs-12 col-sm-12">
+              <form method="post" action="" id="search_form">{% csrf_token %}
+                  <input id="id_name" type="text" maxlength="50"></td>
+                  <button type="submit" value="Search">Search</button>
+              </form>
+              <div class="card">
+                <div class="card-body">
+                 <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>                        
+                      </thead>
+                      <tbody> 
+                     </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- ENDS $dashboard_content -->
+    </div>
+  </div>
+  <!-- ENDS $content -->  
+</div>
+{% endblock %}

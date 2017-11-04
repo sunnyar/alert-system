@@ -31,8 +31,22 @@ INSTALLED_APPS = DEFAULT_APPS + \
                     'alerts',
                     'dashboard',
                     'hosts',
-                    'rest_framework'
+                    'rest_framework',
+                    'debug_toolbar',
                     ]
+
+MIDDLEWARE_CLASSES += ['debug_toolbar.middleware.DebugToolbarMiddleware']
+
+INTERNAL_IPS = ('127.0.0.1',)
+
+DEBUG_TOOLBAR_CONFIG = {
+    'DISABLE_PANELS': [
+        'debug_toolbar.panels.redirects.RedirectsPanel',
+    ],
+    'SHOW_TEMPLATE_CONTEXT': True,
+}
+
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 # Django-allAuth Configuration
 ACCOUNT_AUTHENTICATION_METHOD = "email"
