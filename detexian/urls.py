@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', DashboardView.as_view(), name="index"),
     url(r'^alerts/', include('alerts.urls')),
+    url(r'^logs/', include('logs.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/profile/$', TemplateView.as_view(template_name='account/profile.html'), name="profile"),
     url(r"^accounts/settings/$", password_change,
