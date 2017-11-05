@@ -1099,7 +1099,9 @@
 
 	<script src="{% static 'assets/js/vendor.bundle.js' %}"></script>
 	<script src="{% static 'assets/js/app.bundle.js' %}"></script>
-	<script>
+	{% block js %}
+	{% endblock %}
+	<!-- <script>
 		$(document).ready(function(){
 			/*$("#navbar_form").on("submit", function(e){
 			  var input = $('#navbar_search').val();
@@ -1128,6 +1130,6 @@
 		      return false;
 		    });
 		});
-	</script>
+	</script> -->
 
 </html>

@@ -8,9 +8,12 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.views.generic.edit import FormView
+from django.http import JsonResponse, HttpResponse
+from django.core import serializers
 
 from .models import Alert
 from .forms import SearchForm
+from .search import alert_search
 
 import datetime, calendar
 from datetime import timedelta, date, datetime
@@ -35,10 +38,16 @@ class AlertListView(LoginRequiredMixin, ListView):
 
 
 class AlertSearchView(FormView):
-    form_class = SearchForm
-    success_url = "/"
-    template_name = "alerts/search.html"
+	form_class = SearchForm
+	success_url = "/alerts/search/"
+	template_name = "alerts/search.html"
+	data = {}
 
-    def form_valid(self, form):
-        print(self.request.POST['id_name'])
-        return super(AlertSearchView, self).form_valid(form)
+	def post(self, request, **kwargs):
+		search_text = self.request.POST.get("search_text")
+		if self.request.POST and self.request.is_ajax():
+			data = {}
+			data["alert_list"] = alert_search(str(search_text))
+    		return JsonResponse(data)
+
+		return super(AlertSearchView, self).post(request, **kwargs)

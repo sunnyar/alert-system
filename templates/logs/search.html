@@ -3,7 +3,13 @@
 {% load i18n %}
 
 {% block head_title %}{% trans "Log Search" %}{% endblock %}
-
+{% block head %}
+  <style>
+    .hidden{
+      display: none;
+    }
+  </style>
+{% endblock %}
 {% block content %}
 
   <div id="header_wrapper" class="header-sm">
@@ -22,30 +28,82 @@
     <div class="content-body">
       <div id="dashboard_content" class="tab-content">
         <div class="tab-pane fade active in" id="dashboard1">
-          <div class="row">                
-            <div class="col-xs-12 col-sm-12">
-              <form method="post" action="" id="search_form">{% csrf_token %}
-                  <input id="id_name" type="text" maxlength="50"></td>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 search-table">
+                <form method="post" action="" id="search_form">{% csrf_token %}
+                  <input id="id_name" name="search_text" type="text" maxlength="50"></td>
                   <button type="submit" value="Search">Search</button>
-              </form>
-              <div class="card">
-                <div class="card-body">
-                 <div class="table-responsive">
-                    <table class="table table-striped">
-                      <thead>                        
-                      </thead>
-                      <tbody> 
-                     </tbody>
-                    </table>
+                </form>
+                <div class="card log-card hidden">
+                  <div class="card-heading"><strong>Search Results</strong></div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                              <th> Name </th>
+                              <th> Date </th>
+                          </tr>
+                        </thead>
+                        <tbody class="table-body">
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
-              </div>
+
+                <div class="card no-log-card hidden">
+                  <div class="card-heading"><strong>No Search Results Found !</strong></div>
+                </div>
+
+            </div>
           </div>
         </div>
       </div>
       <!-- ENDS $dashboard_content -->
     </div>
   </div>
-  <!-- ENDS $content -->  
-</div>
+  <!-- ENDS $content -->
+{% endblock %}
+
+{% block js %}
+  <script>
+    $(document).ready(function(){
+      $("#search_form").on("submit", function() {
+          input = $("#id_name").val();
+          data = "text=" + input;
+          $.ajax({
+            url: '/logs/search/',
+            type: 'POST',
+            data: {
+              'search_text': input,
+              'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(data) {
+              var search_hits = data["log_list"]["hits"]["hits"];
+              var log_div = $('.table-body');
+              if (search_hits.length === 0){
+                $(".log-card").addClass("hidden");
+                $(".no-log-card").removeClass("hidden");
+                log_div.html('');
+              }
+              else{
+                $(".log-card").removeClass("hidden");
+                $(".no-log-card").addClass("hidden");
+                log_div.html('');
+                $.each(search_hits, function(key,valueObj){
+                    log_div.append('<tr><td>'+valueObj._source.name+'</td><td>'+valueObj._source.created_at+'</td></tr>');
+                });
+              }
+              console.log("Search Form submitted Successfully");
+            },
+            error : function() {
+              console.log("Error submitting search form");
+            }
+
+          });
+          return false;
+        });
+    });
+  </script>
 {% endblock %}

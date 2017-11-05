@@ -5,7 +5,10 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 
+from .search import AlertIndex, EventIndex
+
 from functools import partial
+from datetime import datetime
 
 
 class Alert(models.Model):
@@ -47,8 +50,31 @@ class Alert(models.Model):
 	def alert_user(self):
 		return self.client_id.split('-')[1]
 
+	# Add indexing method to Alert
+	def indexing(self):
+		obj = AlertIndex(
+		meta={'id': self.id},
+		server_ip=self.client_id.split('-')[0],
+		name=self.name,
+		logged_user=self.client_id.split('-')[1],
+		created_at=datetime.strftime(self.created_at, "%d %B %Y %H:%M %p"),
+		status=self.status
+		)
+		obj.save()
+		return obj.to_dict(include_meta=True)
+
 
 class Event(models.Model):
 
 	name = models.CharField(max_length=100, null=True, blank=True)
 	created_at = models.DateTimeField(auto_now_add=True, null=True)
+
+	# Add indexing method to Alert
+	def indexing(self):
+		obj = EventIndex(
+		meta={'id': self.id},
+		name=self.name,
+		created_at=datetime.strftime(self.created_at, "%d %B %Y %H:%M %p"),
+		)
+		obj.save()
+		return obj.to_dict(include_meta=True)
