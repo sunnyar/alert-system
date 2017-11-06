@@ -16,9 +16,9 @@ class LogSearchView(FormView):
 
 	def post(self, request, **kwargs):
 		search_text = self.request.POST.get("search_text")
-		if self.request.POST and self.request.is_ajax():
+		if search_text and self.request.is_ajax():
 			data = {}
 			data["log_list"] = event_search(str(search_text))
-    		return JsonResponse(data)
+			return JsonResponse(data)
 
 		return super(LogSearchView, self).post(request, **kwargs)

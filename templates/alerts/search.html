@@ -84,7 +84,6 @@
     $(document).ready(function(){
       $("#search_form").on("submit", function() {
           input = $("#id_name").val();
-          data = "text=" + input;
           $.ajax({
             url: '/alerts/search/',
             type: 'POST',
@@ -93,21 +92,24 @@
               'csrfmiddlewaretoken': '{{ csrf_token }}'
             },
             success: function(data) {
-              var search_hits = data["alert_list"]["hits"]["hits"];
-              var alert_div = $('.table-body');
-              if (search_hits.length === 0){
-                $(".alert-card").addClass("hidden");
-                $(".no-alert-card").removeClass("hidden");
-                alert_div.html('');
-              }
-              else{
-                $(".alert-card").removeClass("hidden");
-                $(".no-alert-card").addClass("hidden");
-                alert_div.html('');
-                /*alert_div.append('<div id="content" class="container-fluid"><div class="content-body"><div id="dashboard_content" class="tab-content"><div class="tab-pane fade active in" id="dashboard1"><div class="row"><div class="col-xs-12 col-sm-12"><div class="card"><div class="card-body"><div class="table-responsive"><table class="table table-striped"><thead><tr><td><strong>Most Recent Alerts :</strong></td></tr><tr><th> Name </th><th> Server </th><th> Date </th><th> Logged-in User </th><th> Resolution Status </th></tr></thead><tbody>');*/
-                $.each(search_hits, function(key,valueObj){
-                    alert_div.append('<tr><td>'+valueObj._source.name+'</td><td>'+valueObj._source.server_ip+'</td><td>'+valueObj._source.created_at+'</td><td>'+valueObj._source.logged_user+'</td><td>'+valueObj._source.status+'</td></tr>');
-                });
+              if (input)
+              {
+                var search_hits = data["alert_list"]["hits"]["hits"];
+                var alert_div = $('.table-body');
+                if (search_hits.length === 0){
+                  $(".alert-card").addClass("hidden");
+                  $(".no-alert-card").removeClass("hidden");
+                  alert_div.html('');
+                }
+                else{
+                  $(".alert-card").removeClass("hidden");
+                  $(".no-alert-card").addClass("hidden");
+                  alert_div.html('');
+                  /*alert_div.append('<div id="content" class="container-fluid"><div class="content-body"><div id="dashboard_content" class="tab-content"><div class="tab-pane fade active in" id="dashboard1"><div class="row"><div class="col-xs-12 col-sm-12"><div class="card"><div class="card-body"><div class="table-responsive"><table class="table table-striped"><thead><tr><td><strong>Most Recent Alerts :</strong></td></tr><tr><th> Name </th><th> Server </th><th> Date </th><th> Logged-in User </th><th> Resolution Status </th></tr></thead><tbody>');*/
+                  $.each(search_hits, function(key,valueObj){
+                      alert_div.append('<tr><td>'+valueObj._source.name+'</td><td>'+valueObj._source.server_ip+'</td><td>'+valueObj._source.created_at+'</td><td>'+valueObj._source.logged_user+'</td><td>'+valueObj._source.status+'</td></tr>');
+                  });
+                }
               }
               /*alert_div.append('</tbody></table></div></div></div></div></div></div></div></div></div>');*/
               console.log("Search Form submitted Successfully");

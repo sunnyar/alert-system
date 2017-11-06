@@ -71,7 +71,6 @@
     $(document).ready(function(){
       $("#search_form").on("submit", function() {
           input = $("#id_name").val();
-          data = "text=" + input;
           $.ajax({
             url: '/logs/search/',
             type: 'POST',
@@ -80,20 +79,23 @@
               'csrfmiddlewaretoken': '{{ csrf_token }}'
             },
             success: function(data) {
-              var search_hits = data["log_list"]["hits"]["hits"];
-              var log_div = $('.table-body');
-              if (search_hits.length === 0){
-                $(".log-card").addClass("hidden");
-                $(".no-log-card").removeClass("hidden");
-                log_div.html('');
-              }
-              else{
-                $(".log-card").removeClass("hidden");
-                $(".no-log-card").addClass("hidden");
-                log_div.html('');
-                $.each(search_hits, function(key,valueObj){
-                    log_div.append('<tr><td>'+valueObj._source.name+'</td><td>'+valueObj._source.created_at+'</td></tr>');
-                });
+              if (input)
+              {
+                var search_hits = data["log_list"]["hits"]["hits"];
+                var log_div = $('.table-body');
+                if (search_hits.length === 0){
+                  $(".log-card").addClass("hidden");
+                  $(".no-log-card").removeClass("hidden");
+                  log_div.html('');
+                }
+                else{
+                  $(".log-card").removeClass("hidden");
+                  $(".no-log-card").addClass("hidden");
+                  log_div.html('');
+                  $.each(search_hits, function(key,valueObj){
+                      log_div.append('<tr><td>'+valueObj._source.name+'</td><td>'+valueObj._source.created_at+'</td></tr>');
+                  });
+                }
               }
               console.log("Search Form submitted Successfully");
             },
